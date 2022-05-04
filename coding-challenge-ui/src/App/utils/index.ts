@@ -28,8 +28,9 @@ const getDaysOverdue = (order: any) => {
 export const formatOrders = (orders: any) => {
   if (!orders?.length) return;
 
-  return orders.map((order: any) => {
+  return orders.map((order: any, index: number) => {
     return {
+      key: `${order.Id}-${index}`,
       ...order,
       orderValue: getDollarValueString(order.orderValue),
       daysOverdue: getDaysOverdue(order),
