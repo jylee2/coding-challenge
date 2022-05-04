@@ -4,7 +4,7 @@ import { Row, Table, Typography } from "antd";
 import config from "../config";
 import { formatOrders, getFlagEmoji } from "../utils";
 
-const OverdueSales = () => {
+const OverdueSales = ({ style }: any) => {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [pagination, setPagination] = useState({ current: 1, pageSize: 5 });
@@ -108,14 +108,8 @@ const OverdueSales = () => {
   }, []);
 
   return (
-    <Row
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        marginLeft: "20px",
-      }}
-    >
-      <Typography.Paragraph>Overdue Orders</Typography.Paragraph>
+    <Row style={style}>
+      <Typography.Paragraph strong>Overdue Orders</Typography.Paragraph>
       <Table
         size="small"
         // @ts-ignore

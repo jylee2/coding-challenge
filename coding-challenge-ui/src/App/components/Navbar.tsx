@@ -5,7 +5,7 @@ import config from "../config";
 import { ACTION } from "../types/types";
 import Reducer, { initialState } from "../utils/useStoreReducer";
 
-const Navbar = () => {
+const Navbar = ({ style }: any) => {
   const [state, dispatch] = useReducer(Reducer, initialState);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <Row style={{ width: "100%" }}>
+    <Row style={style}>
       <Col span={8}>
         <h1 style={{ margin: "20px", fontWeight: "bold" }}>
           Analytics Dashboard
