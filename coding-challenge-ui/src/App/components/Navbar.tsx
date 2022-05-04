@@ -1,9 +1,13 @@
-import { memo, useEffect } from "react";
+import { memo, useReducer, useEffect } from "react";
 import { Row, Col } from "antd";
 
 import config from "../config";
+import { ACTION } from "../types/types";
+import Reducer, { initialState } from "../utils/useStoreReducer";
 
 const Navbar = () => {
+  const [state, dispatch] = useReducer(Reducer, initialState);
+
   useEffect(() => {
     (async () => {
       const resp = await fetch(`${config.apiUrl}/user`, {
@@ -11,7 +15,10 @@ const Navbar = () => {
       });
 
       const body = await resp.json();
-      console.log("--------body", body);
+
+      if (body) {
+        dispatch({ type: ACTION.SET_USER, payload: body });
+      }
     })();
   }, []);
 
@@ -21,7 +28,11 @@ const Navbar = () => {
         <h1>Analytics Dashboard</h1>
       </Col>
       <Col span={8} offset={8} style={{ textAlign: "right" }}>
-        <p>Welcome, Jane!</p>
+        <p>
+          {state?.loggedInUser
+            ? `Welcome, ${state.loggedInUser.firstName}!`
+            : `Sign In`}
+        </p>
       </Col>
     </Row>
   );
