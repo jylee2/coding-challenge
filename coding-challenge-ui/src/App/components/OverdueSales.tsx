@@ -99,7 +99,7 @@ const OverdueSales = () => {
 
   useEffect(() => {
     (() => {
-      console.log("--------Hello");
+      // console.log("--------Hello");
     })();
   }, []);
 
