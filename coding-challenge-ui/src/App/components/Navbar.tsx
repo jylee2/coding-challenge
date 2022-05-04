@@ -29,9 +29,20 @@ const Navbar = () => {
   return (
     <Row style={{ width: "100%" }}>
       <Col span={8}>
-        <h1>Analytics Dashboard</h1>
+        <h1 style={{ margin: "20px", fontWeight: "bold" }}>
+          Analytics Dashboard
+        </h1>
       </Col>
-      <Col span={8} offset={8} style={{ textAlign: "right" }}>
+      <Col
+        span={8}
+        offset={8}
+        style={{
+          display: "flex",
+          paddingRight: "20px",
+          alignItems: "center",
+          justifyContent: "flex-end",
+        }}
+      >
         <p>
           {state?.loggedInUser
             ? `Welcome, ${state.loggedInUser.firstName}!`

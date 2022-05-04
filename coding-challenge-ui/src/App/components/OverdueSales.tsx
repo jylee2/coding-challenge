@@ -64,9 +64,9 @@ const OverdueSales = () => {
     setPagination({ current, pageSize });
   }, []);
 
-  // const showTotal = useCallback((total: any, range: any) => {
-  //   return `${range[0]} - ${range[1]} of ${total}`;
-  // }, []);
+  const showTotal = useCallback((total: any, range: any) => {
+    return `${range[0]} - ${range[1]} of ${total}`;
+  }, []);
 
   const onShowSizeChange = useCallback((current: number, pageSize: number) => {
     setPagination({ current, pageSize });
@@ -76,12 +76,12 @@ const OverdueSales = () => {
     () => ({
       showSizeChanger: true,
       onChange,
-      // showTotal,
+      showTotal,
       onShowSizeChange,
       pageSizeOptions: [5, 10, 20, 50],
       ...pagination,
     }),
-    [onChange, onShowSizeChange, pagination]
+    [onChange, onShowSizeChange, pagination, showTotal]
   );
 
   useEffect(() => {
