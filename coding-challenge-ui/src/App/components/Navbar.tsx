@@ -10,14 +10,18 @@ const Navbar = () => {
 
   useEffect(() => {
     (async () => {
-      const resp = await fetch(`${config.apiUrl}/user`, {
-        method: "GET",
-      });
+      try {
+        const resp = await fetch(`${config.apiUrl}/user`, {
+          method: "GET",
+        });
 
-      const body = await resp.json();
+        const body = await resp.json();
 
-      if (body) {
-        dispatch({ type: ACTION.SET_USER, payload: body });
+        if (!body) return;
+
+        return dispatch({ type: ACTION.SET_USER, payload: body });
+      } catch (error) {
+        console.error("--------query user error", error);
       }
     })();
   }, []);
