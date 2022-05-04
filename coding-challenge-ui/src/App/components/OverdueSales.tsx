@@ -1,8 +1,8 @@
 import { memo, useState, useEffect, useMemo, useCallback } from "react";
-import { Table, Typography } from "antd";
+import { Row, Table, Typography } from "antd";
 
 import config from "../config";
-import { formatOrders } from "../utils";
+import { formatOrders, getFlagEmoji } from "../utils";
 
 const OverdueSales = () => {
   const [orders, setOrders] = useState([]);
@@ -13,7 +13,20 @@ const OverdueSales = () => {
     () => [
       {
         title: "MARKETPLACE",
-        render: (record: any) => record.store.marketplace,
+        render: (record: any) => {
+          const flag = getFlagEmoji(record.store.country.slice(0, 2));
+          return (
+            <div
+              style={{
+                fontWeight: "normal",
+                display: "flex",
+                flexDirection: "row",
+              }}
+            >
+              {`${flag} ${record.store.marketplace}`}
+            </div>
+          );
+        },
       },
       {
         title: "STORE",
@@ -95,7 +108,13 @@ const OverdueSales = () => {
   }, []);
 
   return (
-    <>
+    <Row
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        marginLeft: "20px",
+      }}
+    >
       <Typography.Paragraph>Overdue Orders</Typography.Paragraph>
       <Table
         size="small"
@@ -105,7 +124,7 @@ const OverdueSales = () => {
         dataSource={orders}
         pagination={paginationObj}
       />
-    </>
+    </Row>
   );
 };
 

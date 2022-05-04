@@ -37,3 +37,14 @@ export const formatOrders = (orders: any) => {
     };
   });
 };
+
+export const getFlagEmoji = (countryCode: string) => {
+  if (!countryCode) return;
+
+  const codePoints = countryCode
+    .trim()
+    .toUpperCase()
+    .split("")
+    .map((char: string) => 127397 + char.charCodeAt(0));
+  return String.fromCodePoint(...codePoints);
+};
