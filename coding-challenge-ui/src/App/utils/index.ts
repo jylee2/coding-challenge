@@ -1,3 +1,5 @@
+import differenceInDays from "date-fns/differenceInDays";
+
 const getDollarValueString = (orderValue: string) => {
   if (!orderValue) return;
 
@@ -11,7 +13,16 @@ const getDollarValueString = (orderValue: string) => {
 };
 
 const getDaysOverdue = (order: any) => {
-  return order.latest_ship_date;
+  if (!order.latest_ship_date) return;
+
+  let [day, month, year] = order.latest_ship_date.split("/");
+
+  const diffDays = differenceInDays(
+    new Date(),
+    new Date(`${month} ${day}, ${year} 00:00:00`)
+  );
+
+  return diffDays;
 };
 
 export const formatOrders = (orders: any) => {
