@@ -3,8 +3,14 @@ import { render, screen } from "@testing-library/react";
 
 import App from "./App";
 
-test("renders learn react link", () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe("renders entire app", () => {
+  it("should have children", async () => {
+    render(<App />);
+
+    const titleElement = await screen.findByText("Analytics Dashboard");
+    expect(titleElement).toBeInTheDocument();
+
+    const overdueElement = await screen.findByText("Overdue Orders");
+    expect(overdueElement).toBeInTheDocument();
+  });
 });

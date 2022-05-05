@@ -1,7 +1,3 @@
-export type ActionType = {
-  request: Request;
-};
-
 export enum ACTION {
   SET_USER = "set_user",
 }
