@@ -1,3 +1,4 @@
+import { Request, Response } from "express";
 import csv from "csv-parser";
 import fs from "fs";
 
@@ -27,26 +28,31 @@ export const getStores = async () => {
   return stores;
 };
 
-const getSales = async (req: any, res: any) => {
-  const orders = await getOrders();
-  const stores = await getStores();
+const getSales = async (req: Request, res: Response) => {
+  try {
+    const orders = await getOrders();
+    const stores = await getStores();
 
-  if (!orders?.length) {
-    return res.send({
-      orders: [],
+    if (!orders?.length) {
+      return res.send({
+        orders: [],
+      });
+    }
+
+    const paddedOrders = stores?.length
+      ? orders.map((order: any) => ({
+          ...order,
+          store: stores.find((store: any) => store.storeId === order.storeId),
+        }))
+      : orders;
+
+    return res.json({
+      orders: paddedOrders,
     });
+  } catch (error) {
+    console.log("--------Failed to getSales.", error);
+    return res.status(500).json("Internal Server Error");
   }
-
-  const paddedOrders = stores?.length
-    ? orders.map((order: any) => ({
-        ...order,
-        store: stores.find((store: any) => store.storeId === order.storeId),
-      }))
-    : orders;
-
-  return res.json({
-    orders: paddedOrders,
-  });
 };
 
 export default getSales;
