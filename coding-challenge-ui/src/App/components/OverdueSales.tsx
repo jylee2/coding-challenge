@@ -26,7 +26,7 @@ const OverdueSales = ({ style }: any) => {
         setOrders(formatOrders(body.orders));
         setIsLoading(false);
       } catch (error) {
-        console.log("--------query sales error", error);
+        console.error("--------query sales error", error);
         setIsLoading(false);
       }
     })();

@@ -71,20 +71,14 @@ const OverdueSalesTable = ({ orders = [], isLoading = false }: any) => {
     return `${range[0]} - ${range[1]} of ${total}`;
   }, []);
 
-  const onShowSizeChange = useCallback((current: number, pageSize: number) => {
-    setPagination({ current, pageSize });
-  }, []);
-
   const paginationObj = useMemo(
     () => ({
-      showSizeChanger: true,
       onChange,
       showTotal,
-      onShowSizeChange,
       pageSizeOptions: [5, 10],
       ...pagination,
     }),
-    [onChange, onShowSizeChange, pagination, showTotal]
+    [onChange, pagination, showTotal]
   );
 
   return (
