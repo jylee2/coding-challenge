@@ -1,5 +1,5 @@
 import { memo, useReducer, useEffect } from "react";
-import { Row, Col } from "antd";
+import { Row, Col, Typography } from "antd";
 
 import config from "../config";
 import { ACTION } from "../types/types";
@@ -43,11 +43,11 @@ const Navbar = ({ style }: any) => {
           justifyContent: "flex-end",
         }}
       >
-        <p>
+        <Typography.Paragraph strong>
           {state?.loggedInUser
             ? `Welcome, ${state.loggedInUser.firstName}!`
             : `Sign In`}
-        </p>
+        </Typography.Paragraph>
       </Col>
     </Row>
   );

@@ -14,19 +14,18 @@ const App = () => {
         <Col style={{ width: "100%" }}>
           <Row style={{ height: "80px" }} />
           <Row>
-            <Col span={2} />
-            <Col span={20}>
+            <Col xs={{ span: 0 }} md={{ span: 2 }} />
+            <Col xs={{ span: 24 }} md={{ span: 20 }}>
               <OverdueSales
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  marginLeft: "20px",
                   backgroundColor: "white",
                   padding: "20px",
                 }}
               />
             </Col>
-            <Col span={2} />
+            <Col xs={{ span: 0 }} md={{ span: 2 }} />
           </Row>
         </Col>
       </Row>

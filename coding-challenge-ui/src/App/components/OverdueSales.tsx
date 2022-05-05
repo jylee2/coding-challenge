@@ -27,10 +27,12 @@ const OverdueSales = ({ style }: any) => {
             </div>
           );
         },
+        responsive: ["md"],
       },
       {
         title: "STORE",
         render: (record: any) => record.store.shopName,
+        responsive: ["md"],
       },
       {
         title: "ORDER ID",
@@ -49,12 +51,16 @@ const OverdueSales = ({ style }: any) => {
       {
         title: "DESTINATION",
         dataIndex: "destination",
+        responsive: ["md"],
       },
       {
         title: "DAYS OVERDUE",
-        dataIndex: "daysOverdue",
+        align: "center",
         defaultSortOrder: "descend",
         sorter: (a: any, b: any) => a.daysOverdue - b.daysOverdue,
+        render: (record: any) => {
+          return <div style={{ color: "red" }}>{record.daysOverdue}</div>;
+        },
       },
     ],
     []
@@ -78,7 +84,7 @@ const OverdueSales = ({ style }: any) => {
       onChange,
       showTotal,
       onShowSizeChange,
-      pageSizeOptions: [5, 10, 20, 50],
+      pageSizeOptions: [5, 10],
       ...pagination,
     }),
     [onChange, onShowSizeChange, pagination, showTotal]
@@ -101,7 +107,7 @@ const OverdueSales = ({ style }: any) => {
         setOrders(formatOrders(body.orders));
         setIsLoading(false);
       } catch (error) {
-        console.error("--------query sales error", error);
+        console.log("--------query sales error", error);
         setIsLoading(false);
       }
     })();
